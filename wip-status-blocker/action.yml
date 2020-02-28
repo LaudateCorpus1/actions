@@ -1,0 +1,9 @@
+name: 'WIP Status Blocker'
+description: 'Check if PR has a work-in-progress label attached to it'
+inputs:
+  label:
+    description: 'Case sensitive name of label to check for'
+    default: 'WIP'
+runs:
+  using: 'node12'
+  main: 'index.js'
