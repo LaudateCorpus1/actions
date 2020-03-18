@@ -1,0 +1,18 @@
+name: 'Commit Comparison Files'
+description: 'Grab changed files from given BASE and HEAD refs, and output file lists based on given minimatch patterns'
+inputs:
+  delimiter:
+    default: ' '
+    description: 'Character delimiter when joining file lists together'
+  token:
+    required: true
+    description: 'GITHUB_TOKEN required for fetches commit comparison via REST API'
+  baseRef:
+    required: true
+    description: 'Base ref to make comparison from'
+  headRef:
+    required: true
+    description: 'Head ref to make comparison from'
+runs:
+  using: 'node12'
+  main: 'index.js'
