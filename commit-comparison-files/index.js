@@ -9,6 +9,7 @@ async function run() {
     const token = core.getInput('token', { required: true });
     const baseRef = core.getInput('baseRef', { required: true });
     const headRef = core.getInput('headRef', { required: true });
+    const ignoreFileStatuses = core.getInput('ignoreFileStatuses').split(',') || [];
     const { owner, repo } = github.context.repo;
 
     const octokit = new github.GitHub(token);
@@ -20,7 +21,10 @@ async function run() {
       head: headRef,
     });
 
-    const files = response.data.files.map(file => file.filename);
+    const files = response.data.files
+      .filter(file => !ignoreFileStatuses.includes(file.status))
+      .map(file => file.filename);
+
     const fileFilters = Array.from(Object.entries(process.env)).reduce(
       (filters, [key, value]) => {
         if (/INPUT_(\w+)_FILES/.test(key)) {

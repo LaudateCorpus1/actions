@@ -13,6 +13,8 @@ inputs:
   headRef:
     required: true
     description: 'Head ref to make comparison from'
+  ignoreFilesStatuses:
+    description: 'Comma separated list of file statuses to ignore in results'
 runs:
   using: 'node12'
   main: 'index.js'
